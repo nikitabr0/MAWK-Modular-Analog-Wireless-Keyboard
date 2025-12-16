@@ -9,7 +9,7 @@ Don't want to use XIAO nRF52840 or a similar breakout board because of space con
 Cheapest nRF52840 in a QFN-73 package (only this one has USB-D pins): https://www.aliexpress.com/item/1005005069398861.html
 Also there's one on LCSC (JLCPCB): https://www.lcsc.com/product-detail/C190794.html
 
-Apparently I don't need an expensive J-Link or nRF52840 devboard for flashing a bare nRF52840 SMD chip, it can be done with RPi (for example RP20240) with firmware like pico-debug or picoprog.
+Apparently I don't need an expensive J-Link or nRF52840 devboard for flashing a bare nRF52840 SMD chip, it can be done with RPi (for example RP2040) with firmware like pico-debug or picoprog.
 
 Decided to go with "Gateron Double-Rail Magnetic Dawn" switches (https://www.aliexpress.com/item/1005006788772072.html), as they're cheap and have a standard (Cherry MX) physical dimensions.
 

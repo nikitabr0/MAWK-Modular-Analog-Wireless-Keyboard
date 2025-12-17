@@ -1,0 +1,14 @@
+2025.12.17 - 1.5h
+
+Power management:
+Gonna use Microchip MCP73871. It got full battery and power-path management, so I just gotta connect VBUS (USB-C) -> IN and OUT -> VDDH (nRF52840) + other 5V things.
+AliExpress: https://www.aliexpress.com/item/1005008336731440.html
+LSCS: https://www.lcsc.com/product-detail/C511310.html
+
+TMR sensor:
+Allegro CT8150PC-IS3 should work, but the specific placement relatively to the Gateron Double-Rail Magnetic switches is questinable. Has ±8mT sensitivity range. ChatGPT suggests that the magnet should remain in the 2.5-5mm range from the sensor for it to work reliably, while the key travel is 4mm. It's especially likely that it will come too clode to the sensor. Will have to actually test this before making the PCB design.
+Possile solutions include:
+- Placing the sensor on the bottom of the PCB to prevent going over 8mT when the key is fully pressed. Could cut off the sensing at the top.
+- Make the firmware show the switch as fully pressed at ~90% actually pressed. Cuts off the analog functionality at the bottom.
+- Place the sensor a bit off center. Weakens the magnetic field, improves linearity (ChatGPT claim), wouldn't matter much to the sensitivity, because it's TMR.
+Turns out they're really expensive. Found them only at LCSC (https://www.lcsc.com/product-detail/C22879138.html) for ~1.5$/pcs. Will try to find something cheaper.

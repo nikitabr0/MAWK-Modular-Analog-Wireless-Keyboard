@@ -41,3 +41,27 @@ Will go with SOP-16 package for easier assembly.
 
 Cheapest at LCSC: https://www.lcsc.com/product-detail/C87646.html
 AliExpress: https://www.aliexpress.com/item/1005009321962080.html
+
+
+
+2025.12.18 - 2h:
+
+
+There are no cheaper analog sensors :(
+
+
+Li-Po battery - basically Li-Ion, but in any shape.
+
+
+Using adaptive polling rate (event-driven scanning, no movement for a while = 50Hz, movement = more Hz) saves battery.
+
+
+nRF52840 in modules, cuz gonna have to buy 5 of them anyway - plenty of everything.
+
+Series resistor (10 Ohms) on SDA and SCL to limit inrush current on plug/unplug.
+Pull-ups only on the main module.
+MOSFETs, that block SDA and SCL until the slave MCU powers up completely and opens them.
+
+Thin SDA and SCL (.15-.2mm) ans no parralel power/GND.
+
+When connected, the slave module sets a "discovery" address, which the main MCU will periodically look for. When there is one, the main MCU will ask for module type and then assign a unique address for current session. The slaves will have to keep the next slaves in line without power, until they receive their session address so there's no multiple MCUs with the same address.

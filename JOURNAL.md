@@ -52,3 +52,4 @@ Decided to use a Li-Po battery like this: https://www.aliexpress.com/item/100500
 
 Will use nRF52840 for modules as well, as I'll have to buy them in bulk anyways.
 Probably will have to use multiple I2C buses to mitigate capacitance. Will add MOSFETs on SDA and SCL on the modules to keep them disconnected until the module MCU powers up completely, to prevent unexpected spikes. Modules are going to set an "advertisement" address on startup, the main MCU will contact that address for module type and then assign it a unique address for the session.
+![image](Images/2025_12_18_I2C_buses_sketch.png)

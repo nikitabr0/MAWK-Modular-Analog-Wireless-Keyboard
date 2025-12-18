@@ -36,6 +36,7 @@ Found a little cheaper at DigiKey (just 0.83€/pcs at 100+): https://www.digike
 Analog multiplexers:
 Since nRF52840 can use just 8 pins for SAADC, I'm gonna have to use multiplexers. Found Texas Instruments CD4051B, they have 3 address pins, 8 inputs/outputs and can be disabled.
 I could wire all the address pins to 3 pins on nRF, MUXs' outputs are connected in groups of 3 to 3 ADC pins on nRF (so 1 ADC pin per 3 MUXs) and then I use 3 pins, each connected to 3 MUXs from different groups, on nRF to enable the MUXs and allow it to read each TMR sensor independently. So it's basically a matrix.
+![image](Images/2025_12_17_ADC_MUXs_scheme_sketch.png)
 Will go with SOP-16 package for easier assembly.
 Cheapest at LCSC: https://www.lcsc.com/product-detail/C87646.html
 AliExpress: https://www.aliexpress.com/item/1005009321962080.html

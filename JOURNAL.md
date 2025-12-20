@@ -53,3 +53,26 @@ Decided to use a Li-Po battery like this: https://www.aliexpress.com/item/100500
 Will use nRF52840 for modules as well, as I'll have to buy them in bulk anyways.
 Probably will have to use multiple I2C buses to mitigate capacitance. Will add MOSFETs on SDA and SCL on the modules to keep them disconnected until the module MCU powers up completely, to prevent unexpected spikes. Modules are going to set an "advertisement" address on startup, the main MCU will contact that address for module type and then assign it a unique address for the session.
 ![image](Images/2025_12_18_I2C_buses_sketch.png)
+
+
+## 2025.12.20 - 2.5h:
+
+### SPI for high-speed modules (displays, trackpads), connectors
+
+Decided to add SPI buses for higher-speed modules (displays and trackpads).
+Will need to do SCLK, MOSI, MISO and 2-3 CS pins for each bus. Multiple CSs are to allow connecting multiple SPI modules on the same bus.
+SPIs are kinda sensitive in terms of hot-plugging, so need a lot of precautions. Generally SCLK, MOSI, MISO don't matter as far as CS is high, but I'll add isolation just in case. They will be isolated until the slave is powered up and ready to estabilish the connection.
+
+1. The module is connected, MCU powers up, all buses are isolated.
+2. The slave opens I2C, goes live on it and tells the master, that it's a SPI module.
+3. The master tells the slave to open the SPI and start communication.
+4. Slave starts SPI.
+5. It works!
+
+All CS lines should have pull-ups (10-100 kOhms) on the master side. Good to add pull-downs on clock lines. 22-68 Ohm series resistors on SCLK amd MOSI close to the master MCU
+Decided to use SN74CBTLV3384 for I2C and SPI isolation. It can enable it's channels in groups of 5, so I can keep SPI switched off even when I2C is active.
+Cheapest at LCSC: https://www.lcsc.com/product-detail/C2653297.html
+DigiKey: https://www.digikey.ee/en/products/detail/texas-instruments/SN74CBTLV3384PWR/378134
+
+For edge connectors I'll use pogo pins. To allow any module to be connected from any side and other modules to be connected to it, I'll use this configuration:
+![image](Images/2025_12_20_connectors_scheme.png)

@@ -65,3 +65,28 @@ MOSFETs, that block SDA and SCL until the slave MCU powers up completely and ope
 Thin SDA and SCL (.15-.2mm) ans no parralel power/GND.
 
 When connected, the slave module sets a "discovery" address, which the main MCU will periodically look for. When there is one, the main MCU will ask for module type and then assign a unique address for current session. The slaves will have to keep the next slaves in line without power, until they receive their session address so there's no multiple MCUs with the same address.
+
+
+
+2025.12.20 - 2.5h:
+
+
+Decided to add SPI buses for higher-speed modules (displays and trackpads).
+Will need to do SCLK, MOSI, MISO and 2-3 CS pins for each bus. Multiple CSs are to allow connecting multiple SPI modules on the same bus (same side of the keyboard).
+SPIs are kinda sensitive, so need a lot of precautions. By default the SCLK, MOSI, MISO and CS should be isolated until the slave is powered up and ready to estabilish the connection.
+
+1. The module is connected, MCU powers up, all buses are isolated.
+2. The slave opens I2C, goes live on it and tells the master, that it it's and SPI module.
+3. The master tells the slave to open the SPI and start communication.
+4. It works!
+
+All CS lines should have pull-ups (10-100 kOhms) on the master side. Good to add pull-downs on clock lines. 22-68 Ohm series resistors on SCLK amd MOSI close to the master MCU
+
+
+Decided to use SN74CBTLV3384 for I2C and SPI isolation. It can enable it's channels in groups of 5, so I can keep SPI switched off even when I2C is active.
+
+Cheapest at LCSC: https://www.lcsc.com/product-detail/C2653297.html
+DigiKey: https://www.digikey.ee/en/products/detail/texas-instruments/SN74CBTLV3384PWR/378134
+
+
+Pogo pins. Hybrid connectors on each side (half pins are pins, half are pads), so the module can be connected anywhere.
